@@ -211,7 +211,7 @@ function subsets(v::Vector{N}) where N
 end
 
 # subsets of a given max length
-function subsets(v::Vector{N}, maxLength::Int64; proper::Bool = false) where N
+function subsets(v::AbstractVector{N}, maxLength::Int64; proper::Bool = false) where N
     if maxLength == 0 
         return [ N[] ]
     elseif isempty(v)
@@ -237,4 +237,9 @@ disp(W::Matrix{Char}) = join(join.(eachrow(W), ' '),'\n') |> println
 function mazenext2d(w::Matrix{Char}, p::CartesianIndex{2}; wall::Char = '#')
     out = [p + c for c in Cartesians4]
     return filter!(c -> isassigned(w, c) && (w[c] != wall), out)
+end
+
+function output(x)
+    clipboard(x)
+    println("Output: ", x)
 end
